@@ -1,0 +1,22 @@
+.list-container {
+  margin: 10px;
+  border: 1px solid #ccc;
+  background-color: azure;
+  padding: 10px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-section > input {
+  margin-left: 10px;
+}
