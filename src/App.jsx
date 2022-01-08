@@ -1,5 +1,8 @@
 
 import React, { useState } from 'react'
+import Header from './components/Header/Header';
+import Modal from './components/Modal/Modal';
+import ProductItem from './components/ProductItem/ProductItem';
 import ProductsList from './components/ProductsList/ProductsList';
 // JSX - Javascript XML
 
@@ -28,6 +31,8 @@ const products = [
 
 function App() {
   const [cartItems, setCartItems] = useState([])
+  const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
   // { title: 'something' }
   const addToCart = item => {
@@ -53,18 +58,57 @@ function App() {
     })
   }
 
+  const deleteCartItem = (item) => {
+    setCartItems((oldCartItems) => {
+      const result = oldCartItems.filter(d => {
+        if(d.title === item.title) {
+          return false;
+        }
+        return true;
+      })
+
+      return result;
+    })
+  }
+
   return (
     <div>
-      <h1>Cart Items: {cartItems.length}</h1>
-      <div>
-        <ul>
-          {
-            cartItems.map((d, index) => {
-              return <li key={index}>{d.title} ({d.count})</li>
-            })
-          }
-        </ul>
-      </div>
+      <Header
+        cartListItems={cartItems}
+        onLoginClick={() => setShowLoginModal(true)}
+        onCartClick={() => setShowModal(true)}
+        />
+      <Modal title='Your Cart!' showFooter open={showModal} onClose={() => setShowModal(false)}>
+        {
+          cartItems.length ? (
+            <div>
+              <h4>List of Products</h4>
+              <ul>
+                {
+                  cartItems.map((d, index) => {
+                    return <li key={index}>
+                      <ProductItem
+                        title={d.title}
+                        desc={d.desc}
+                        count={d.count}
+                        image={d.image}
+                        deleteItem={deleteCartItem}
+                      />
+                      </li>
+                  })
+                }
+              </ul>
+            </div>
+          ) : (
+            <div className='text-center p-4'>
+              <h1 className='text-lg'>Continue Shopping!</h1>
+            </div>
+          )
+        }
+      </Modal>
+      <Modal title='Login' showFooter open={showLoginModal} onClose={() => setShowLoginModal(false)}>
+        <h1>Login Form</h1>
+      </Modal>
       <ProductsList title='New Deals!' subtitle='only for you' data={products} onAdd={addToCart} />
       <ProductsList title='Mobiles!' data={products} onAdd={addToCart} />
       <ProductsList title='Laptops!' onAdd={addToCart} />

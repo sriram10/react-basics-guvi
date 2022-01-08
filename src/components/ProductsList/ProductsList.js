@@ -10,8 +10,8 @@ import './ProductsList.css'
 function ProductsList(props) {
   const [val, setValue] = useState('')
   useEffect(() => {
-    // console.log('ProductsList Component', val)
-  }, []);
+    console.log('ProductsList Component', val)
+  }, [val.length > 3]);
   
   if(!props.data) {
     return null;

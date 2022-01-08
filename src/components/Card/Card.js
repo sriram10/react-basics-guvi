@@ -16,7 +16,7 @@ function Card(props){
       <img src={props.imageSource} />
       <h3>{props.title}</h3>
       <p>{props.desc}</p>
-      <button onClick={() => { props.onAdd({ title: props.title }) }}>Add to Cart</button>
+      <button onClick={() => { props.onAdd({ title: props.title, image: props.imageSource, desc: props.desc }) }}>Add to Cart</button>
     </div>
   )
 }

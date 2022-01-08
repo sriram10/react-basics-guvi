@@ -38,3 +38,13 @@ ReactDOM.render(
  * Props drilling
  * Passing data from child to parent component
  */
+
+/**
+ * Day 3:
+ * 1. Design Cart and its components
+ * 2. Add a cart button on the top right
+ * 3. Create a modal component to list the items added to the cart
+ * 4. Open the modal if cart button is clicked
+ * 5. Product Item component to list in cart
+ * 6. Create Counter component
+ */
