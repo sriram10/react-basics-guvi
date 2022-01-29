@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import AboutPage from "./pages/about";
+import DealInfoPage from './pages/dealInfo';
 import HomePage from "./pages/home"
+import ProductDetailPage from './pages/productDetail';
 import TermsPage from "./pages/terms";
 
 const App = () => {
@@ -37,6 +39,8 @@ const App = () => {
         <Route path="/" element={<HomePage cartItems={cartItems} addToCart={addToCart} />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/deal/:dealId" element={<DealInfoPage />} />
+        <Route path="/product/:productTitle" element={<ProductDetailPage />} />
       </Routes>
     </Layout>
   )

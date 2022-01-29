@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import Card from '../Card/Card'
 import './ProductsList.css'
 
@@ -35,7 +36,16 @@ function ProductsList(props) {
         {
           props.data.map((item, index) => {
             if(item.title.toLowerCase().includes(val)) {
-              return <Card key={index} title={item.title} desc={item.desc} imageSource={item.image} onAdd={props.onAdd} />
+              return (
+                <Link to={`/product/${item.title}`}>
+                  <Card
+                    key={index}
+                    title={item.title}
+                    desc={item.desc}
+                    imageSource={item.image}
+                    onAdd={props.onAdd} />
+                </Link>
+              )
             }
             return null
           })

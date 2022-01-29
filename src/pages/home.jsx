@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react'
+import Deals from '../components/Deals/Deals';
 import ProductsList from '../components/ProductsList/ProductsList';
 // JSX - Javascript XML
 
@@ -29,6 +30,7 @@ const products = [
 function HomePage(props) {
   return (
     <div>
+      <Deals />
       <ProductsList title='New Deals!' subtitle='only for you' data={products} onAdd={props.addToCart} />
       <ProductsList title='Mobiles!' data={products} onAdd={props.addToCart} />
       <ProductsList title='Laptops!' onAdd={props.addToCart} />
