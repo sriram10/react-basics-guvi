@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import PrimaryButton from "../Button/Button";
 
 const Header = (props) => {
@@ -8,6 +9,9 @@ const Header = (props) => {
       </div>
 
       <div>
+        <Link className="mr-4" to="/">Home</Link>
+        <Link className="mr-4" to="/terms">Terms & Conditions</Link>
+        <Link className="mr-4" to="/about">About</Link>
         <PrimaryButton className="mr-4" onClick={props.onLoginClick}>
           Login/Sign up
         </PrimaryButton>
