@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { GlobalContext } from "../../context/globalContext";
 import PrimaryButton from "../Button/Button"
 import Counter from "../Counter/Counter";
 
@@ -8,6 +10,7 @@ import Counter from "../Counter/Counter";
  * 4. delete button
  */
 const ProductItem = ({ title, desc, image, count, deleteItem }) => {
+  const { updateCart } = useContext(GlobalContext)
   return (
     <div className="border-b border-slate-600/25 p-4 flex justify-between items-start">
       <div className="flex flex-1">
@@ -22,7 +25,9 @@ const ProductItem = ({ title, desc, image, count, deleteItem }) => {
       </div>
       <div className="flex items-top">
         <div>
-          <Counter startValue={count}/>
+          <Counter startValue={count} onChangeCount={(newCount) => {
+            updateCart(title, newCount)
+          }}/>
         </div>
         <div className="ml-4">
           <PrimaryButton className="bg-red-300 text-red-800" onClick={() => deleteItem({ title })}>

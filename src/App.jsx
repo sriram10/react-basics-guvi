@@ -52,8 +52,20 @@ const App = () => {
       return newCartList;
     })
   }
+
+  const updateCart = (productTitle, newCount) => {
+    setCartItems(oldStateValue => {
+      return oldStateValue.map(d => {
+        if(productTitle === d.title) {
+          d.count = newCount;
+        }
+        return d;
+      })
+    })
+  }
+
   return (
-    <GlobalProvider value={{ cartItems, addToCart }}>
+    <GlobalProvider value={{ cartItems, addToCart, updateCart }}>
       <Layout updateCartItems={setCartItems}>
         <Routes>
           <Route path="/" element={<HomePage />} />
