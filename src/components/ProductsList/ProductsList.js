@@ -42,8 +42,7 @@ function ProductsList(props) {
                     key={index}
                     title={item.title}
                     desc={item.desc}
-                    imageSource={item.image}
-                    onAdd={props.onAdd} />
+                    imageSource={item.image} />
                 </Link>
               )
             }

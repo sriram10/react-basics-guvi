@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import { GlobalProvider } from './context/globalContext';
 import AboutPage from "./pages/about";
 import DealInfoPage from './pages/dealInfo';
 import HomePage from "./pages/home"
@@ -9,6 +10,24 @@ import TermsPage from "./pages/terms";
 
 const App = () => {
   const [cartItems, setCartItems] = useState([])
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    if(isMounted.current) {
+      localStorage.setItem('__CART__', JSON.stringify(cartItems))
+    }
+  }, [cartItems])
+  
+  useEffect(() => {
+    const ls = localStorage.getItem('__CART__');
+    const d = JSON.parse(ls)
+  
+    if(cartItems.length === 0 && d.length) {
+      setCartItems(d)
+    }
+
+    isMounted.current = true;
+  }, [])
 
   // { title: 'something' }
   const addToCart = item => {
@@ -34,21 +53,25 @@ const App = () => {
     })
   }
   return (
-    <Layout cartItems={cartItems} updateCartItems={setCartItems}>
-      <Routes>
-        <Route path="/" element={<HomePage cartItems={cartItems} addToCart={addToCart} />} />
-        <Route path="/terms" element={<TermsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/deal/:dealId" element={<DealInfoPage />} />
-        <Route path="/product/:productTitle" element={<ProductDetailPage />} />
-      </Routes>
-    </Layout>
+    <GlobalProvider value={{ cartItems, addToCart }}>
+      <Layout updateCartItems={setCartItems}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/deal/:dealId" element={<DealInfoPage />} />
+          <Route path="/product/:productTitle" element={<ProductDetailPage />} />
+        </Routes>
+      </Layout>
+    </GlobalProvider>
   )
 }
 
 export default App;
 
 /**
- * 1. Multiple URLs
- * 2. Different Content for unique url
+ * Global Context - 
+ * For every Change on data update localstorage
+ * After refresh Get data from localstorage and update the context data
+ * 
  */

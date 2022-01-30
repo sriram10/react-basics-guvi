@@ -1,7 +1,10 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom'
+import { GlobalContext } from '../../context/globalContext';
 import PrimaryButton from "../Button/Button";
 
 const Header = (props) => {
+  const { cartItems } = useContext(GlobalContext)
   return (
     <div className="p-4 mb-3 flex justify-between bg-slate-600 text-slate-100">
       <div>
@@ -17,7 +20,7 @@ const Header = (props) => {
         </PrimaryButton>
         <PrimaryButton onClick={props.onCartClick}>
           Cart {
-            props.cartListItems.length ? `(${props.cartListItems.length})` : null
+            cartItems.length ? `(${cartItems.length})` : null
           }
         </PrimaryButton>
       </div>

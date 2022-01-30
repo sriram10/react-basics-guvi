@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { GlobalContext } from '../../context/globalContext';
 import Header from "../Header/Header"
 import Modal from "../Modal/Modal";
 import ProductItem from '../ProductItem/ProductItem';
 
 const Layout = (props) => {
+  const { cartItems } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
@@ -23,18 +25,17 @@ const Layout = (props) => {
   return (
     <div>
       <Header
-        cartListItems={props.cartItems}
         onLoginClick={() => setShowLoginModal(true)}
         onCartClick={() => setShowModal(true)}
         />
       <Modal title='Your Cart!' showFooter open={showModal} onClose={() => setShowModal(false)}>
         {
-          props.cartItems.length ? (
+          cartItems.length ? (
             <div>
               <h4>List of Products</h4>
               <ul>
                 {
-                  props.cartItems.map((d, index) => {
+                  cartItems.map((d, index) => {
                     return <li key={index}>
                       <ProductItem
                         title={d.title}

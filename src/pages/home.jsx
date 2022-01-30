@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import Deals from '../components/Deals/Deals';
 import ProductsList from '../components/ProductsList/ProductsList';
+import { HomeProvider } from '../context/homeContext';
 // JSX - Javascript XML
 
 const products = [
@@ -29,13 +30,15 @@ const products = [
 
 function HomePage(props) {
   return (
-    <div>
-      <Deals />
-      <ProductsList title='New Deals!' subtitle='only for you' data={products} onAdd={props.addToCart} />
-      <ProductsList title='Mobiles!' data={products} onAdd={props.addToCart} />
-      <ProductsList title='Laptops!' onAdd={props.addToCart} />
-      <ProductsList title='Recents' data={products} onAdd={props.addToCart} />
-    </div>
+    <HomeProvider value={{ title: 'Home Page title' }}>
+      <div>
+        <Deals />
+        <ProductsList title='New Deals!' subtitle='only for you' data={products} />
+        <ProductsList title='Mobiles!' data={products} />
+        <ProductsList title='Laptops!' />
+        <ProductsList title='Recents' data={products} />
+      </div>
+    </HomeProvider>
   );
 }
 
