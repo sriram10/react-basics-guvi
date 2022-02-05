@@ -13,6 +13,7 @@ const Header = (props) => {
 
       <div>
         <Link className="mr-4" to="/">Home</Link>
+        <Link className="mr-4" to="/products">Products</Link>
         <Link className="mr-4" to="/terms">Terms & Conditions</Link>
         <Link className="mr-4" to="/about">About</Link>
         <PrimaryButton className="mr-4" onClick={props.onLoginClick}>
