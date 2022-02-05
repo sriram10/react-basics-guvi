@@ -9,7 +9,12 @@ import fetchApi from '../utils/fetchApi';
  * 1. Accessing REST API in all browers and even in older versions
  * 2. axios object provides abstraction for all methods
  * 3. axios.get('')
- * 
+ * 4. REST API structure
+ *  1. GET - /products - fetch all products
+ *  2. POST - /products - Create a new product
+ *  3. PATCH/PUT - /products/:id - update product detail
+ *  4. DELETE - /products/:id - deletes a product
+ *  5. GET (specific product) = /products/:id - returns requested product
  */
 
 const ProductsPage = () => {
@@ -52,7 +57,27 @@ const ProductsPage = () => {
   const onAddProduct = () => {
     if(formData.name) {
       fetchApi.post('/products', {
-        ...formData
+        name: formData.name,
+        desc: formData.desc,
+        image: formData.image,
+      })
+      .then(res => {
+        getProducts();
+        setShowModal(false)
+        setFormData({})
+      })
+      .catch(e => {
+        console.log('Product Add Err >', e)
+      })
+    }
+  }
+
+  const onUpdateProduct = () => {
+    if(formData.name && formData.id) {
+      fetchApi.patch(`/products/${formData.id}`, {
+        name: formData.name,
+        desc: formData.desc,
+        image: formData.image,
       })
       .then(res => {
         getProducts();
@@ -76,6 +101,11 @@ const ProductsPage = () => {
       })
   }
 
+  const onEditProduct = (item) => {
+    setFormData(item);
+    setShowModal(true)
+  }
+
   return (
     <div>
       <h1>Products Page</h1>
@@ -89,9 +119,10 @@ const ProductsPage = () => {
             return (
               <div key={item.id} className='inline-block p-5'>
                 <img src={item.image} style={{ height: 50, width: 'auto' }} />
-                <p>{item.title}</p>
+                <p>{item.name}</p>
                 <p>{item.desc}</p>
-                <PrimaryButton onClick={() => onDeleteProduct(item.id)}>🗑 Delete</PrimaryButton>
+                <PrimaryButton className='mr-2 text-sm' onClick={() => onEditProduct(item)}>✎ Edit</PrimaryButton>
+                <PrimaryButton className='text-sm' onClick={() => onDeleteProduct(item.id)}>🗑 Delete</PrimaryButton>
               </div>
             )
           })
@@ -102,14 +133,18 @@ const ProductsPage = () => {
           })
         }
       </div>
-      <Modal title='Add Product' open={showModal}>
+      <Modal title={formData.id ? 'Edit Product' : 'Add Product'} open={showModal}>
         <div className='flex direction-column'>
           <input className='border' type={'text'} value={formData.name} name='name'  placeholder='Name' onChange={onInputChange} />
           <input className='border' type={'text'} value={formData.desc} name='desc'  placeholder='Desc' onChange={onInputChange} />
           <input className='border' type={'text'} value={formData.image} name='image' placeholder='Image url'  onChange={onInputChange} />
-          <PrimaryButton onClick={onAddProduct}>Add</PrimaryButton>
+          {
+            formData.id ? 
+              <PrimaryButton onClick={onUpdateProduct}>Update</PrimaryButton>
+              : <PrimaryButton onClick={onAddProduct}>Add</PrimaryButton>
+          }
         </div>
-        <PrimaryButton onClick={() => setShowModal(false)}>
+        <PrimaryButton onClick={() => {setFormData({}); setShowModal(false)}}>
           Close
         </PrimaryButton>
       </Modal>

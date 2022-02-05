@@ -2,15 +2,21 @@
   "products": [
     {
       "id": 1,
-      "title": "Apple",
+      "name": "Apple",
       "image": "https://rukminim1.flixcart.com/image/300/300/ksru0sw0/screen-guard/back-screen-guard/v/z/x/v2109bkcam-desibuzz-original-imag69mcgjysvwzt.jpeg?q=70",
       "desc": "MacBook"
     },
     {
       "id": 2,
-      "title": "Windows",
+      "name": "Windows - new Name",
       "image": "https://rukminim1.flixcart.com/image/300/300/km0x5zk0/microphone/j/9/z/k678-fifine-original-imagfyn8nhkezmzg.jpeg?q=70",
       "desc": "Microsoft"
+    },
+    {
+      "name": "Apple new one",
+      "desc": "MacBook",
+      "image": "https://rukminim1.flixcart.com/image/300/300/ksru0sw0/screen-guard/back-screen-guard/v/z/x/v2109bkcam-desibuzz-original-imag69mcgjysvwzt.jpeg?q=70",
+      "id": 3
     }
   ],
   "reviews": [
