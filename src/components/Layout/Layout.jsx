@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { GlobalContext } from '../../context/globalContext';
+import Login from '../Forms/Login';
+import Signup from '../Forms/Signup';
 import Header from "../Header/Header"
 import Modal from "../Modal/Modal";
 import ProductItem from '../ProductItem/ProductItem';
@@ -56,8 +58,9 @@ const Layout = (props) => {
           )
         }
       </Modal>
-      <Modal title='Login' showFooter open={showLoginModal} onClose={() => setShowLoginModal(false)}>
-        <h1>Login Form</h1>
+      <Modal title='Signup' showFooter open={showLoginModal} onClose={() => setShowLoginModal(false)}>
+        {/* <Login /> */}
+        <Signup />
       </Modal>
 
       {
