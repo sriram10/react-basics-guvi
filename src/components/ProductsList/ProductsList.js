@@ -37,7 +37,7 @@ function ProductsList(props) {
           props.data.map((item, index) => {
             if(item.title.toLowerCase().includes(val)) {
               return (
-                <Link to={`/product/${item.title}`}>
+                <Link to={`/product/${item.title}`} key={index}>
                   <Card
                     key={index}
                     title={item.title}

@@ -21,7 +21,7 @@ const Deals = () => {
       <div className='p-1 flex'>
         {
           data.map(item => (
-            <Link to={`/deal/${item.id}?type=deals-page`}>
+            <Link to={`/deal/${item.id}?type=deals-page`} key={item.id}>
               <div>
                 <img src={item.thumbnailUrl} />
               </div>

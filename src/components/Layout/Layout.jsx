@@ -10,6 +10,7 @@ const Layout = (props) => {
   const { cartItems } = useContext(GlobalContext);
   const [showModal, setShowModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showLogin, setShowLogin] = useState(true);
 
   const deleteCartItem = (item) => {
     props.updateCartItems((oldCartItems) => {
@@ -58,9 +59,19 @@ const Layout = (props) => {
           )
         }
       </Modal>
-      <Modal title='Signup' showFooter open={showLoginModal} onClose={() => setShowLoginModal(false)}>
-        {/* <Login /> */}
-        <Signup />
+      <Modal title={showLogin ? 'Login' : 'Signup'} showFooter open={showLoginModal} onClose={() => setShowLoginModal(false)}>
+        {
+          showLogin ? <Login /> : <Signup />
+        }
+
+        {/* Sign Up/Login Option */}
+        {
+          showLogin ? (
+            <p className='text-grey'>Don't have an account? <span onClick={() => setShowLogin(false)}>Sign up here.</span></p>
+          ) : (
+            <p className='text-grey'>Already have an account? <span onClick={() => setShowLogin(true)}>Login here.</span></p>
+          )
+        }
       </Modal>
 
       {

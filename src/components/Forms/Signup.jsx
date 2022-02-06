@@ -57,8 +57,6 @@ const Signup = () => {
         }
       </Formik>
 
-      {/* Login Option */}
-      <p className='text-grey'>Already have an account? Login here.</p>
     </div>
   )
 }
